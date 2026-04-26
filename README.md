@@ -5,7 +5,7 @@
 ## 📸 Preview
 
 <p align="center">
-  <img src="./public/demo.png" alt="Preview do convite" width="800"/>
+  <img src="./public/demo.png" alt="Preview do convite" width="400"/>
 </p>
 
 Página de convite digital para o casamento de Paula e Fernando, desenvolvida com WordPress e Elementor.
