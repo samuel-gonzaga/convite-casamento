@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmações — Ana &amp; Lucas</title>
+  <meta name="robots" content="noindex" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Parisienne&family=Playfair+Display:wght@500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../css/forms.css?v=4" />
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- LOGIN -->
+    <section id="login-view">
+      <header class="page-head">
+        <div class="page-head__script">Confirmações</div>
+        <p class="page-head__sub">Acesso dos noivos</p>
+      </header>
+
+      <div class="card">
+        <div class="notice notice--error" id="login-notice" hidden></div>
+        <form id="login-form">
+          <div class="field">
+            <label class="field__label" for="email">E-mail</label>
+            <input class="input" type="email" id="email" autocomplete="username" required />
+          </div>
+          <div class="field">
+            <label class="field__label" for="password">Senha</label>
+            <input class="input" type="password" id="password" autocomplete="current-password" required />
+          </div>
+          <button class="btn" type="submit">Entrar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- DADOS -->
+    <section id="data-view" hidden>
+      <div class="admin-bar">
+        <span class="admin-bar__title">Confirmações</span>
+        <div class="admin-bar__actions">
+          <button class="btn btn--ghost" id="refresh-btn">Atualizar</button>
+          <button class="btn btn--ghost" id="logout-btn">Sair</button>
+        </div>
+      </div>
+
+      <!-- Contadores -->
+      <div class="counters">
+        <div class="counter counter--go">
+          <div class="counter__num" id="c-go">0</div>
+          <div class="counter__label">Confirmados</div>
+        </div>
+        <div class="counter counter--no">
+          <div class="counter__num" id="c-no">0</div>
+          <div class="counter__label">Ausentes</div>
+        </div>
+        <div class="counter counter--all">
+          <div class="counter__num" id="c-all">0</div>
+          <div class="counter__label">Respostas</div>
+        </div>
+      </div>
+      <p class="muted" style="padding:0 0 18px;margin-top:-10px">
+        Total de pessoas confirmadas: <b id="c-people" style="color:var(--green)">0</b>
+      </p>
+
+      <!-- Filtros -->
+      <div class="filters">
+        <button class="filter is-active" data-filter="todos">Todos</button>
+        <button class="filter" data-filter="sim">Quem vai</button>
+        <button class="filter" data-filter="nao">Quem não vai</button>
+      </div>
+
+      <div class="rsvp-list" id="rsvp-list"></div>
+    </section>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

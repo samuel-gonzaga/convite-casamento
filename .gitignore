@@ -1,0 +1,5 @@
+# Variáveis de ambiente — nunca commitar
+.env
+
+# Gerado pelo generate-config.js — não commitar (contém chaves)
+js/config.js

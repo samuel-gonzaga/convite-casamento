@@ -1,6 +1,6 @@
-# Convite de Casamento — Paula & Fernando
+# Convite de Casamento — Ana & Lucas
 
-[**Acessar o convite**](https://casamentopaulaefernado.com.br/)
+[**Acessar o convite**](https://exemplo.com.br/)
 
 ## 📸 Preview
 
@@ -8,7 +8,7 @@
   <img src="./public/demo.png" alt="Preview do convite" width="800"/>
 </p>
 
-Página de convite digital para o casamento de Paula e Fernando, desenvolvida com WordPress e Elementor.
+Página de convite digital para o casamento de Ana e Lucas, desenvolvida com WordPress e Elementor.
 
 ## Visão Geral
 
@@ -22,11 +22,11 @@ A página principal apresenta as seguintes seções:
 
 - **Versículo bíblico** — Rute 1:16-17, como abertura do convite.
 - **Foto dos noivos** — Imagem principal em destaque.
-- **Nomes dos noivos** — Paula e Fernando.
+- **Nomes dos noivos** — Ana e Lucas.
 - **Benção dos pais** — Nomes dos pais dos noivos.
 - **Chamada para o evento** — "Convidamos você para nosso casamento…"
 - **Data e horário** — 01 de Maio de 2026, às 16h00.
-- **Local** — Cerimônia no Santuário São Geraldo Manjella e recepção na Chácara Happy Day.
+- **Local** — Cerimônia na Igreja Matriz e recepção no Espaço de Eventos Jardim.
 - **Links de ação** — Ícones que direcionam para as páginas de confirmação de presença, lista de presentes e localização.
 
 ### Confirmação de Presença (`/confirmar-presenca`)
