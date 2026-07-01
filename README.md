@@ -8,58 +8,103 @@
   <img src="./public/demo.png" alt="Preview do convite" width="800"/>
 </p>
 
-Página de convite digital para o casamento de Ana e Lucas, desenvolvida com WordPress e Elementor.
+Página de convite digital de casamento, construída como um site estático leve (HTML, CSS e JavaScript puros) com backend serverless no **Supabase** e deploy na **Vercel**. Sem frameworks, sem build pesado — apenas o essencial para carregar rápido no celular.
+
+> Os dados exibidos (nomes, pais, local e chave PIX) são **fictícios**, usados apenas para demonstração.
 
 ## Visão Geral
 
-O site é uma landing page de página única com seções complementares para confirmação de presença e lista de presentes. Foi construído utilizando o construtor visual Elementor sobre WordPress, sem necessidade de código personalizado ou funcionalidades complexas.
+Landing page mobile-first de página única, com páginas complementares para **confirmação de presença (RSVP)**, **lista de presentes (PIX)** e um **painel administrativo** para os noivos acompanharem as respostas em tempo real.
 
-## Estrutura do Site
-
-### Página Inicial (`/`)
-
-A página principal apresenta as seguintes seções:
-
-- **Versículo bíblico** — Rute 1:16-17, como abertura do convite.
-- **Foto dos noivos** — Imagem principal em destaque.
-- **Nomes dos noivos** — Ana e Lucas.
-- **Benção dos pais** — Nomes dos pais dos noivos.
-- **Chamada para o evento** — "Convidamos você para nosso casamento…"
-- **Data e horário** — 01 de Maio de 2026, às 16h00.
-- **Local** — Cerimônia na Igreja Matriz e recepção no Espaço de Eventos Jardim.
-- **Links de ação** — Ícones que direcionam para as páginas de confirmação de presença, lista de presentes e localização.
-
-### Confirmação de Presença (`/confirmar-presenca`)
-
-Formulário construído com **Forminator**, com os seguintes campos:
-
-- Nome completo (obrigatório)
-- Telefone / WhatsApp (obrigatório)
-- Confirmação de presença (sim/não)
-- Quantidade de convidados (1 a 4 pessoas)
-- Restrição alimentar (opcional)
-- Mensagem para os noivos (opcional)
-
-Os dados submetidos são enviados automaticamente para uma planilha no **Google Sheets** via integração do Forminator, mantendo-a atualizada a cada nova submissão. Isso elimina a necessidade de os noivos organizarem manualmente as confirmações de quem vai, quem não vai, restrições alimentares e demais informações.
-
-### Presentear (`/presentear`)
-
-Página com a chave PIX para quem desejar contribuir com um presente em dinheiro.
+As confirmações são gravadas diretamente numa tabela do Supabase (Postgres) a partir do navegador, protegidas por políticas de **Row Level Security (RLS)**: qualquer visitante pode enviar uma confirmação, mas somente os noivos autenticados conseguem ler as respostas.
 
 ## Tecnologias Utilizadas
 
-- **WordPress** 6.9.4 — CMS e gerenciamento de conteúdo.
-- **Elementor** 4.0.3 — Construtor visual de páginas (drag-and-drop).
-- **Forminator** — Plugin de formulários com integração nativa a Google Sheets.
-- **Google Sheets** — Planilha online para centralizar e organizar as confirmações de presença em tempo real.
-- **Hospedagem** — Hostinger.
+| Camada | Tecnologia |
+|---|---|
+| **Frontend** | HTML5, CSS3 e JavaScript (vanilla, sem framework) |
+| **Backend / Banco** | [Supabase](https://supabase.com/) (Postgres + Row Level Security) |
+| **Autenticação** | Supabase Auth (e-mail/senha, para o painel dos noivos) |
+| **SDK** | `@supabase/supabase-js` v2 (via CDN jsDelivr) |
+| **Tipografia** | Google Fonts — Montserrat, Playfair Display e Parisienne |
+| **Ícones** | [Lucide](https://lucide.dev/) (SVG inline) |
+| **Build** | `generate-config.js` (Node) — injeta as variáveis de ambiente em `js/config.js` |
+| **Hospedagem** | [Vercel](https://vercel.com/) |
 
-## Funcionalidades
+## Estrutura do Projeto
 
-- Layout mobile first
-- Formulário de confirmação de presença integrado via Elementor.
-- Navegação entre páginas com links de ação na página inicial.
+```
+convite-casamento/
+├── index.html              # Convite principal (página inicial)
+├── confirmar-presenca/     # Formulário de RSVP
+│   └── index.html
+├── presentear/             # Página com a chave PIX
+│   └── index.html
+├── admin/                  # Painel dos noivos (login + confirmações)
+│   └── index.html
+├── css/
+│   ├── style.css           # Estilos do convite
+│   └── forms.css           # Estilos dos formulários e do admin
+├── js/
+│   ├── rsvp.js             # Envio do RSVP para o Supabase
+│   ├── admin.js            # Login + dashboard de confirmações
+│   └── config.js           # Gerado no build (NÃO versionado)
+├── public/                 # Imagens (fotos, enfeites florais, preview)
+├── generate-config.js      # Gera js/config.js a partir do .env
+├── supabase-setup.sql      # Script de criação da tabela e políticas RLS
+├── vercel.json             # Configuração de build/deploy
+└── .env.example            # Modelo das variáveis de ambiente
+```
 
-## Como este repositório foi criado
+## Páginas
 
-Este repositório foi criado com o objetivo de centralizar e documentar essa landing page desenvolvida com WordPress e Elementor. O código-fonte do tema e plugins não está versionado aqui, o foco é a documentação do projeto e do que foi construído.
+### Página Inicial (`/`)
+- **Versículo bíblico** — Rute 1:16-17, como abertura do convite.
+- **Fotos dos noivos** — imagens em destaque ao longo da página.
+- **Nomes dos noivos** — Ana e Lucas.
+- **Benção dos pais** — nomes dos pais dos noivos.
+- **Data e horário** — 01 de Maio de 2026, às 16h00.
+- **Local** — cerimônia e recepção.
+- **Links de ação** — atalhos para confirmar presença, presentear e ver a localização.
+
+### Confirmação de Presença (`/confirmar-presenca`)
+Formulário com nome, telefone/WhatsApp e confirmação de presença (sim/não). Ao confirmar, revela campos condicionais de quantidade de convidados (1 a 4), restrição alimentar e mensagem para os noivos. O envio grava a resposta na tabela `rsvp` do Supabase e exibe uma tela de agradecimento.
+
+### Presentear (`/presentear`)
+Página com a chave PIX dos noivos e botão para copiar a chave para a área de transferência.
+
+### Admin (`/admin`)
+Área restrita dos noivos. Após login (Supabase Auth), exibe contadores (confirmados, ausentes, total de respostas e total de pessoas), filtros (todos / quem vai / quem não vai) e a lista completa das confirmações. Protegido por RLS — só usuários autenticados leem os dados.
+
+## Rodando Localmente
+
+Pré-requisitos: [Node.js](https://nodejs.org/) e uma conta no [Supabase](https://supabase.com/).
+
+1. **Configure o Supabase**
+   Crie um projeto no Supabase e rode o conteúdo de [`supabase-setup.sql`](./supabase-setup.sql) em **SQL Editor → New query**. Depois, em **Authentication → Users**, crie o usuário (e-mail + senha) que os noivos usarão no `/admin`.
+
+2. **Configure as variáveis de ambiente**
+   ```bash
+   cp .env.example .env
+   ```
+   Preencha o `.env` com a URL e a chave anônima (anon) do seu projeto Supabase:
+   ```
+   SUPABASE_URL=https://SEU-PROJETO.supabase.co
+   SUPABASE_ANON_KEY=sua-chave-anon-aqui
+   ```
+
+3. **Gere o config e sirva os arquivos**
+   ```bash
+   node generate-config.js      # gera js/config.js a partir do .env
+   npx serve .                  # ou qualquer servidor estático
+   ```
+
+## Deploy (Vercel)
+
+O deploy é automático a partir do repositório. Em **Settings → Environment Variables**, defina `SUPABASE_URL` e `SUPABASE_ANON_KEY`. No build, a Vercel executa o `buildCommand` (`node generate-config.js`), que gera o `js/config.js` com as chaves do ambiente — por isso esse arquivo **nunca** é versionado.
+
+## Segurança
+
+- **`.env` e `js/config.js` não são versionados** (ver `.gitignore`) — as chaves reais ficam apenas no ambiente local e nas variáveis da Vercel.
+- A **chave anônima (anon)** do Supabase é pública por design; o acesso aos dados é controlado pelas **políticas de RLS**, não pela chave.
+- Visitantes só têm permissão de **inserir** RSVP; a **leitura** exige autenticação.
