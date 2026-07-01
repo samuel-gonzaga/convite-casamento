@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentear — Ana &amp; Lucas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&family=Playfair+Display:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../css/forms.css?v=4" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="page-head">
+      <div class="page-head__script">Presentear</div>
+      <p class="page-head__sub">Presenteie os Noivos</p>
+    </header>
+
+    <div class="card">
+      <div class="pix">
+        <p class="pix__text">
+          Sua presença é o nosso maior presente, mas se desejar nos presentear,
+          aqui está nossa chave PIX.
+        </p>
+
+        <div class="pix__key">
+          <span id="pix-key">000.000.000-00</span>
+        </div>
+        <button class="btn btn--ghost" type="button" id="copy-btn" style="margin-bottom:14px">
+          Copiar chave PIX
+        </button>
+
+        <p class="pix__text" style="margin:0">
+          <span class="pix__holder">Ana Oliveira Souza</span><br />
+          <span style="color:var(--sage);font-size:.9rem">Chave PIX (CPF)</span>
+        </p>
+      </div>
+    </div>
+
+    <p style="text-align:center"><a class="back-link" href="../">← Voltar ao convite</a></p>
+  </div>
+
+  <script>
+    (function () {
+      const btn = document.getElementById("copy-btn");
+      const key = document.getElementById("pix-key").textContent.trim();
+      btn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(key);
+          btn.textContent = "Chave copiada!";
+          setTimeout(() => (btn.textContent = "Copiar chave PIX"), 2000);
+        } catch {
+          btn.textContent = "Copie manualmente: " + key;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

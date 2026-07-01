@@ -1,0 +1,310 @@
+/* ============================================================
+   Subpáginas (Confirmar Presença · Presentear · Admin)
+   Visual coerente com o convite: mesmas fontes e cores.
+   ============================================================ */
+
+:root {
+  --bg:      #f7f5f2;  /* fundo creme               */
+  --panel:   #98b0a0;  /* verde sálvia (painéis)    */
+  --green:   #4a6d5a;  /* verde primário (texto/btn)*/
+  --sage:    #8aa590;  /* verde secundário          */
+  --cream:   #f7f5f2;  /* texto sobre verde         */
+  --line:    #e3ded6;  /* bordas suaves             */
+  --danger:  #b46a5b;  /* "não comparece"           */
+
+  --f-sans:   "Montserrat", system-ui, sans-serif;
+  --f-serif:  "Playfair Display", Georgia, serif;
+  --f-script: "Parisienne", cursive;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  font-family: var(--f-sans);
+  color: var(--green);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 56px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 460px;
+}
+
+/* ---- Cabeçalho das páginas ---- */
+.page-head { text-align: center; margin-bottom: 28px; }
+
+.page-head__script {
+  font-family: var(--f-script);
+  font-weight: 500;
+  font-size: 3.4rem;
+  line-height: 1.1;
+  color: var(--green);
+}
+
+.page-head__sub {
+  font-family: var(--f-serif);
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--sage);
+  margin-top: 6px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: var(--sage);
+  text-decoration: none;
+}
+.back-link:hover { text-decoration: underline; }
+
+/* ---- Cartão ---- */
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 22px;
+  box-shadow: 0 8px 24px rgba(74, 109, 90, 0.06);
+}
+
+/* ============================================================
+   Formulário
+   ============================================================ */
+.field { margin-bottom: 22px; }
+
+.field > label.field__label,
+.field__label {
+  display: block;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+.field__label .req { color: var(--danger); }
+.field__hint { font-weight: 400; color: var(--sage); font-size: 0.82rem; }
+
+.input,
+.textarea {
+  width: 100%;
+  font-family: var(--f-sans);
+  font-size: 1rem;
+  color: var(--green);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.textarea { resize: vertical; min-height: 84px; }
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(138, 165, 144, 0.25);
+}
+
+/* Opções (radio) como "pílulas" clicáveis */
+.options { display: flex; flex-direction: column; gap: 10px; }
+.options--inline { flex-direction: row; flex-wrap: wrap; }
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.options--inline .option { flex: 1 1 calc(50% - 5px); }
+.option:hover { border-color: var(--sage); }
+.option input { accent-color: var(--green); width: 18px; height: 18px; }
+.option:has(input:checked) {
+  border-color: var(--green);
+  background: rgba(138, 165, 144, 0.12);
+}
+
+/* Bloco condicional (aparece só ao confirmar presença) */
+.conditional[hidden] { display: none; }
+
+/* Botão */
+.btn {
+  width: 100%;
+  font-family: var(--f-sans);
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  background: var(--green);
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.btn:hover { opacity: .92; }
+.btn:disabled { opacity: .55; cursor: default; }
+.btn--ghost {
+  background: transparent;
+  color: var(--green);
+  border: 1px solid var(--line);
+}
+
+/* Mensagens de estado */
+.notice { border-radius: 10px; padding: 12px 14px; font-size: 0.92rem; margin-bottom: 16px; }
+.notice--error   { background: #f6e7e3; color: #8c4636; }
+.notice--success { background: #e6efe9; color: var(--green); }
+
+.form-success {
+  text-align: center;
+  padding: 8px 0;
+}
+.form-success__icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--green); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+}
+.form-success__icon svg { width: 32px; height: 32px; }
+
+/* ============================================================
+   Presentear (PIX)
+   ============================================================ */
+.pix {
+  text-align: center;
+}
+.pix__text {
+  font-size: 1rem;
+  color: var(--green);
+  margin-bottom: 22px;
+}
+.pix__holder { font-weight: 600; }
+.pix__key {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: rgba(138, 165, 144, 0.12);
+  border: 1px dashed var(--sage);
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+
+/* ============================================================
+   Admin
+   ============================================================ */
+.counters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.counter {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 10px;
+  text-align: center;
+}
+.counter__num {
+  font-family: var(--f-serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.counter__label { font-size: 0.78rem; color: var(--sage); margin-top: 6px; }
+.counter--go   .counter__num { color: var(--green); }
+.counter--no   .counter__num { color: var(--danger); }
+.counter--all  .counter__num { color: var(--sage); }
+
+.admin-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap;            /* botões descem de linha em telas estreitas */
+  margin-bottom: 18px; gap: 12px;
+}
+.admin-bar__title { font-family: var(--f-script); font-size: 2.4rem; color: var(--green); }
+.admin-bar__actions { display: flex; gap: 8px; margin-left: auto; }
+.admin-bar__actions .btn { width: auto; padding: 8px 14px; }
+
+/* Lista de respostas — vira "cards" empilhados (bom no celular) */
+.rsvp-list { display: flex; flex-direction: column; gap: 12px; }
+.rsvp-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--sage);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.rsvp-item--go { border-left-color: var(--green); }
+.rsvp-item--no { border-left-color: var(--danger); }
+.rsvp-item__top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.rsvp-item__name { font-weight: 600; font-size: 1.05rem; }
+.badge { font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+.badge--go { background: #e6efe9; color: var(--green); }
+.badge--no { background: #f6e7e3; color: var(--danger); }
+.rsvp-item__meta { font-size: 0.88rem; color: var(--sage); margin-top: 4px; }
+.rsvp-item__field { font-size: 0.9rem; margin-top: 8px; }
+.rsvp-item__field b { color: var(--green); font-weight: 600; }
+
+.filters { display: flex; gap: 8px; margin-bottom: 14px; }
+.filter {
+  flex: 1; text-align: center; font-size: 0.85rem; font-weight: 500;
+  padding: 8px; border-radius: 8px; border: 1px solid var(--line);
+  background: #fff; color: var(--sage); cursor: pointer;
+}
+.filter.is-active { background: var(--green); color: #fff; border-color: var(--green); }
+
+.muted { color: var(--sage); text-align: center; padding: 24px 0; }
+
+/* ============================================================
+   RESPONSIVO — mobile-first
+   ------------------------------------------------------------
+   Base (acima) = telas pequenas. Aprimoramentos progressivos
+   abaixo, mantendo a MESMA identidade do convite (cartão branco
+   centrado, mesmas fontes, cores e espaçamentos proporcionais).
+   ============================================================ */
+
+html { -webkit-text-size-adjust: 100%; }
+html, body { overflow-x: hidden; }
+
+/* --- Telas muito pequenas (≤360px) --- */
+@media (max-width: 360px) {
+  body { padding: 24px 14px 48px; }
+  .page-head__script { font-size: clamp(2.6rem, 13vw, 3.4rem); }
+  .card { padding: 24px 18px; }
+  /* pílulas de quantidade empilham para não espremer o texto */
+  .options--inline .option { flex: 1 1 100%; }
+}
+
+/* --- Tablet (≥768px) -----------------------------------------
+   MESMO comportamento da tela principal: a subpágina NÃO se alarga
+   no desktop — mantém a largura "mobile" e vira um cartão (artboard)
+   centrado, com moldura (fundo creme + borda arredondada + sombra).
+   A largura (.wrap: 460px) já é a base; aqui só adicionamos a moldura. */
+@media (min-width: 768px) {
+  body { padding: 48px 24px; align-items: flex-start; }
+  .wrap {
+    background: var(--bg);
+    border-radius: 22px;
+    box-shadow: 0 18px 50px rgba(74, 109, 90, 0.12);
+    padding: 32px 24px;
+  }
+  .page-head { margin-bottom: 30px; }
+  .page-head__script { font-size: 3.8rem; }
+}
+
+/* --- Desktop (≥1024px) --------------------------------------- */
+@media (min-width: 1024px) {
+  body { padding: 64px 24px; }
+}
+
+/* --- Telas grandes (≥1440px) --------------------------------- */
+@media (min-width: 1440px) {
+  body { padding: 80px 24px; }
+  .wrap { box-shadow: 0 24px 64px rgba(74, 109, 90, 0.14); }
+}
